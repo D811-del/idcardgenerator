@@ -35,4 +35,14 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         python -m build  # 使用 build 工具来构建包
-        twine upload dist/*  # 确保 dist 目录中有文件
+        
+    - name: Create ZIP archive of built packages
+      run: |
+        zip -r dist/package.zip dist/*  # 将 dist 目录下的所有文件打包为 package.zip
+        
+    - name: Upload ZIP to GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: dist/package.zip  # 上传 ZIP 文件到 GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token 上传文件
