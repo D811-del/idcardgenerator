@@ -39,5 +39,5 @@ jobs:
     - name: ZIP
       uses: actions/upload-artifact@v4
       with:
-        name: idcardgeneratoi-${{ steps.version.outputs.VER }}-${{ steps.get_time.outputs.TIME }}
+        name: idcardgeneratoi
         path: "dist/*"
