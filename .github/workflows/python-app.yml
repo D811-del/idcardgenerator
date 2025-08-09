@@ -36,7 +36,8 @@ jobs:
       run: |
         python -m build  # 使用 build 工具来构建包
         
-    - name: Create ZIP archive of built packages
-      run: |
-        zip -r dist/package.zip dist/*  # 将 dist 目录下的所有文件打包为 package.zip
-        
+    - name: ZIP
+      uses: actions/upload-artifact@v4
+      with:
+        name: idcardgeneratoi-${{ steps.version.outputs.VER }}-${{ steps.get_time.outputs.TIME }}
+        path: "dist/*"
